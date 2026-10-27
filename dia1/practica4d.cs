@@ -1,1 +1,0 @@
-﻿Console.WriteLine("Total a pagar: " + (20000 + 15000));
