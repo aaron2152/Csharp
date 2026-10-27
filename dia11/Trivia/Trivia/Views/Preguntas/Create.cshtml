@@ -1,0 +1,49 @@
+﻿@model Pregunta
+@{
+    ViewData["Title"] = "Nueva pregunta";
+}
+
+<h1>Nueva pregunta</h1>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="Texto" class="form-label"></label>
+        <input asp-for="Texto" class="form-control" />
+        <span asp-validation-for="Texto" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="OpcionA" class="form-label"></label>
+        <input asp-for="OpcionA" class="form-control" />
+        <span asp-validation-for="OpcionA" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="OpcionB" class="form-label"></label>
+        <input asp-for="OpcionB" class="form-control" />
+        <span asp-validation-for="OpcionB" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="OpcionC" class="form-label"></label>
+        <input asp-for="OpcionC" class="form-control" />
+        <span asp-validation-for="OpcionC" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="OpcionD" class="form-label"></label>
+        <input asp-for="OpcionD" class="form-control" />
+        <span asp-validation-for="OpcionD" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Correcta" class="form-label"></label>
+        <select asp-for="Correcta" class="form-select">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

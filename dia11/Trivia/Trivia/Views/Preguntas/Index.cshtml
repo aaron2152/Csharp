@@ -1,0 +1,35 @@
+﻿@model List<Pregunta>
+@{
+    ViewData["Title"] = "Preguntas";
+}
+
+<h1>Preguntas</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Nueva pregunta</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Pregunta</th>
+            <th>Correcta</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Pregunta p in Model)
+        {
+            <tr>
+                <td>@p.Id</td>
+                <td>@p.Texto</td>
+                <td>@p.Correcta</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@p.Id">Editar</a> |
+                    <a asp-action="Delete" asp-route-id="@p.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,131 @@
+﻿@{
+    ViewData["Title"] = "Política de Privacidad";
+}
+
+<!-- Header / Hero Banner -->
+<div class="bg-light p-4 p-md-5 rounded-3 mb-4 border">
+    <div class="container-fluid py-2">
+        <div class="d-flex align-items-center gap-3 mb-2">
+            <span class="badge bg-primary px-3 py-2 fs-6">Legal</span>
+            <span class="text-muted small">Última actualización: @DateTime.Now.ToString("MMMM yyyy")</span>
+        </div>
+        <h1 class="display-5 fw-bold text-dark">@ViewData["Title"]</h1>
+        <p class="fs-5 text-muted mb-0">
+            En <strong>Agenda App</strong> nos tomamos muy en serio la privacidad y seguridad de tus datos personales.
+        </p>
+    </div>
+</div>
+
+<!-- Main Privacy Content -->
+<div class="row g-4">
+    <!-- Navegación lateral rápida (Índice) -->
+    <div class="col-lg-3 d-none d-lg-block">
+        <div class="card border-0 bg-light sticky-top" style="top: 80px;">
+            <div class="card-body">
+                <h6 class="fw-bold mb-3 text-uppercase text-muted small">En esta página</h6>
+                <nav id="privacy-nav" class="nav nav-pills flex-column small gap-1">
+                    <a class="nav-link text-secondary" href="#section-1">1. Recopilación de Datos</a>
+                    <a class="nav-link text-secondary" href="#section-2">2. Uso de la Información</a>
+                    <a class="nav-link text-secondary" href="#section-3">3. Protección y Seguridad</a>
+                    <a class="nav-link text-secondary" href="#section-4">4. Derechos del Usuario</a>
+                    <a class="nav-link text-secondary" href="#section-5">5. Contacto</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenido de las Secciones -->
+    <div class="col-lg-9">
+        <div class="card border-0 shadow-sm p-4">
+            <div class="card-body">
+
+                <!-- Sección 1 -->
+                <section id="section-1" class="mb-5">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <i class="bi bi-file-earmark-person text-primary fs-4"></i>
+                        <h3 class="h4 mb-0 fw-bold">1. Recopilación de Datos</h3>
+                    </div>
+                    <p class="text-secondary">
+                        Recopilamos la información estrictamente necesaria para brindar el correcto funcionamiento de nuestra plataforma de gestión de agenda y clientes. Esta información incluye:
+                    </p>
+                    <ul class="text-secondary">
+                        <li><strong>Información de registro:</strong> Nombre, dirección de correo electrónico y credenciales de acceso.</li>
+                        <li><strong>Datos de clientes:</strong> Información de contacto e historial registrado directamente por los usuarios en la aplicación.</li>
+                        <li><strong>Datos de uso:</strong> Información técnica sobre el navegador, dirección IP y logs del sistema para fines de diagnóstico.</li>
+                    </ul>
+                </section>
+
+                <hr class="my-4 text-muted opacity-25" />
+
+                <!-- Sección 2 -->
+                <section id="section-2" class="mb-5">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <i class="bi bi-gear-wide-connected text-primary fs-4"></i>
+                        <h3 class="h4 mb-0 fw-bold">2. Uso de la Información</h3>
+                    </div>
+                    <p class="text-secondary">
+                        Los datos recopilados se utilizan únicamente para las siguientes finalidades:
+                    </p>
+                    <div class="row g-3 my-2">
+                        <div class="col-md-6">
+                            <div class="p-3 border rounded bg-light">
+                                <h6 class="fw-bold"><i class="bi bi-check2-circle text-success me-1"></i> Prestación del Servicio</h6>
+                                <p class="small text-muted mb-0">Gestionar tus contactos, citas y datos operativos de la agenda.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 border rounded bg-light">
+                                <h6 class="fw-bold"><i class="bi bi-shield-check text-success me-1"></i> Seguridad</h6>
+                                <p class="small text-muted mb-0">Prevenir accesos no autorizados y detectar posibles vulnerabilidades.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <hr class="my-4 text-muted opacity-25" />
+
+                <!-- Sección 3 -->
+                <section id="section-3" class="mb-5">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <i class="bi bi-lock text-primary fs-4"></i>
+                        <h3 class="h4 mb-0 fw-bold">3. Protección y Seguridad de Datos</h3>
+                    </div>
+                    <p class="text-secondary">
+                        Implementamos medidas técnicas y organizativas líderes en la industria para garantizar un nivel de seguridad adecuado frente al riesgo. Esto incluye encriptación SSL/TLS para el tráfico de datos y almacenamiento seguro en bases de datos con control de acceso restrictivo.
+                    </p>
+                </section>
+
+                <hr class="my-4 text-muted opacity-25" />
+
+                <!-- Sección 4 -->
+                <section id="section-4" class="mb-5">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <i class="bi bi-person-check text-primary fs-4"></i>
+                        <h3 class="h4 mb-0 fw-bold">4. Tus Derechos</h3>
+                    </div>
+                    <p class="text-secondary">
+                        Como usuario, tienes derecho a acceder, rectificar o solicitar la eliminación permanente de tus datos almacenados en cualquier momento directamente desde el panel de administración o contactando con soporte.
+                    </p>
+                </section>
+
+                <hr class="my-4 text-muted opacity-25" />
+
+                <!-- Sección 5 -->
+                <section id="section-5">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <i class="bi bi-envelope-paper text-primary fs-4"></i>
+                        <h3 class="h4 mb-0 fw-bold">5. Contacto y Consultas</h3>
+                    </div>
+                    <p class="text-secondary">
+                        Si tienes dudas sobre esta Política de Privacidad o el tratamiento de tus datos, puedes ponerte en contacto con nuestro equipo legal:
+                    </p>
+                    <div class="p-3 bg-light border rounded d-inline-block">
+                        <small class="d-block"><strong>Correo electrónico:</strong> privacidad@agendaapp.local</small>
+                        <small class="d-block"><strong>Soporte Técnico:</strong> soporte@agendaapp.local</small>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+</div>

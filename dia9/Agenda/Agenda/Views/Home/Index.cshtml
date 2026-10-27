@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Inicio";
+}
+
+<!-- Hero Section -->
+<div class="bg-light p-5 rounded-3 mb-5 border text-center text-md-start">
+    <div class="container-fluid py-3">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <span class="badge bg-primary mb-2 px-3 py-2 fs-6">ASP.NET Core Application</span>
+                <h1 class="display-4 fw-bold text-dark mb-3">Soluciones Digitales de Alto Rendimiento</h1>
+                <p class="fs-5 text-muted mb-4">
+                    Bienvenido a nuestra plataforma. Diseñada para ofrecer seguridad, velocidad y una experiencia de usuario optimizada en cada interacción.
+                </p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <a href="#features" class="btn btn-primary btn-lg px-4 me-md-2 fw-semibold">Explorar Servicios</a>
+                    <a href="https://learn.microsoft.com/aspnet/core" target="_blank" class="btn btn-outline-secondary btn-lg px-4">Documentación</a>
+                </div>
+            </div>
+            <div class="col-lg-4 d-none d-lg-block text-center">
+                <svg class="bi text-primary opacity-75" width="200" height="200" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M11 2a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h6zM5 1a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H5z" />
+                    <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                </svg>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div id="features" class="container py-4">
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Nuestras Características</h2>
+        <p class="text-muted">Construido con las mejores prácticas del desarrollo moderno</p>
+    </div>
+
+    <div class="row g-4">
+        <!-- Feature 1 -->
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm p-3">
+                <div class="card-body">
+                    <div class="bg-primary bg-opacity-10 text-primary rounded-3 p-3 d-inline-block mb-3">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M5.072 1.199a.75.75 0 0 1 .536.222l8 8a.75.75 0 0 1-1.06 1.06l-8-8a.75.75 0 0 1 .524-1.282z" />
+                            <path d="M8 1a7 7 0 1 0 7 7A7.008 7.008 0 0 0 8 1zm0 13A6 6 0 1 1 8 2a6 6 0 0 1 0 12z" />
+                        </svg>
+                    </div>
+                    <h5 class="card-title fw-bold">Alto Rendimiento</h5>
+                    <p class="card-text text-muted">Aprovechamos el motor ultrarrápido de ASP.NET Core para tiempos de respuesta mínimos.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm p-3">
+                <div class="card-body">
+                    <div class="bg-success bg-opacity-10 text-success rounded-3 p-3 d-inline-block mb-3">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 1a2 2 0 0 1 2 2v2H6V3a2 2 0 0 1 2-2zm3 4V3a3 3 0 0 0-6 0v2a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2z" />
+                        </svg>
+                    </div>
+                    <h5 class="card-title fw-bold">Seguridad Robusta</h5>
+                    <p class="card-text text-muted">Protección integrada contra ataques comunes (XSS, CSRF) y gestión segura de identidades.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm p-3">
+                <div class="card-body">
+                    <div class="bg-warning bg-opacity-10 text-warning rounded-3 p-3 d-inline-block mb-3">
+                        <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                        </svg>
+                    </div>
+                    <h5 class="card-title fw-bold">Escalabilidad</h5>
+                    <p class="card-text text-muted">Diseño modular preparado para crecer según las necesidades de tu negocio o usuarios.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

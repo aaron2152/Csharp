@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Página Principal";
+}
+
+<div class="max-w-3xl mx-auto py-12 px-4 text-center space-y-8">
+    <!-- Encabezado Limpio -->
+    <div class="bg-white rounded-2xl p-8 sm:p-10 shadow-sm border border-slate-100 space-y-4">
+        <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+        </div>
+
+        <h1 class="text-3xl font-bold text-slate-800 tracking-tight">
+            Bienvenido a Finanzas
+        </h1>
+
+        <p class="text-slate-500 text-base max-w-md mx-auto">
+            Gestiona tus ingresos y egresos diarios de forma sencilla y organizada.
+        </p>
+
+        <div class="pt-4">
+            <a asp-controller="Movimientos" asp-action="Index" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-6 py-3 rounded-xl transition-all shadow-sm hover:shadow">
+                Ver Movimientos
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- Enlace Discreto a Microsoft Learn -->
+    <p class="text-xs text-slate-400">
+        Aprende más sobre <a href="https://learn.microsoft.com/aspnet/core" target="_blank" class="text-slate-600 hover:text-indigo-600 font-medium underline transition-colors">cómo construir aplicaciones web con ASP.NET Core</a>.
+    </p>
+</div>

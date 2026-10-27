@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "PlayQuiz";
+}
+
+<h1>Trivia de programación</h1>
+
+<p>Responde 5 preguntas y entra al ranking. Cada acierto vale 10 puntos.</p>
+
+<form asp-action="Jugar" method="get">
+    <div class="mb-3">
+        <label for="jugador" class="form-label">Tu nombre</label>
+        <input id="jugador" name="jugador" class="form-control" maxlength="30" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Jugar</button>
+    <a asp-action="Ranking" class="btn btn-secondary">Ver ranking</a>
+</form>

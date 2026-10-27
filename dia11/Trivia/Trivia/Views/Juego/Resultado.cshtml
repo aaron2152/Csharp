@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Resultado";
+}
+
+<h1>Resultado</h1>
+
+<p>@ViewBag.Jugador, acertaste <strong>@ViewBag.Aciertos</strong> de @ViewBag.Total preguntas.</p>
+<p>Puntos obtenidos: <strong>@(ViewBag.Aciertos * 10)</strong></p>
+
+<a asp-action="Ranking" class="btn btn-primary">Ver ranking</a>
+<a asp-action="Index" class="btn btn-secondary">Jugar de nuevo</a>

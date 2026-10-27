@@ -1,0 +1,30 @@
+﻿@model List<Producto>
+@{
+    ViewData["Title"] = "Productos";
+}
+
+<h1>Catálogo de productos</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Producto</th>
+            <th>Categoría</th>
+            <th>Precio</th>
+            <th>Stock</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Producto p in Model)
+        {
+            <tr>
+                <td>@p.Codigo</td>
+                <td>@p.Nombre</td>
+                <td>@p.Categoria</td>
+                <td>@p.PrecioVenta.ToString("N0") Gs</td>
+                <td>@p.Stock</td>
+            </tr>
+        }
+    </tbody>
+</table>

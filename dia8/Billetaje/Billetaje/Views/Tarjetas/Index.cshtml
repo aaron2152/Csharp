@@ -1,0 +1,26 @@
+﻿@model List<Tarjeta>
+@{
+    ViewData["Title"] = "Tarjetas";
+}
+
+<h1>Tarjetas</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Número</th>
+            <th>Titular</th>
+            <th>Saldo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Tarjeta t in Model)
+        {
+            <tr>
+                <td>@t.Numero</td>
+                <td>@t.Titular</td>
+                <td>@t.Saldo.ToString("N0") Gs</td>
+            </tr>
+        }
+    </tbody>
+</table>

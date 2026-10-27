@@ -1,0 +1,28 @@
+﻿@model List<Viaje>
+@{
+    ViewData["Title"] = "Viajes";
+}
+
+<h1>Viajes</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Línea</th>
+            <th>Tarjeta</th>
+            <th>Monto</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Viaje v in Model)
+        {
+            <tr>
+                <td>@v.Linea</td>
+                <td>@v.NumeroTarjeta</td>
+                <td>@v.Monto.ToString("N0") Gs</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>Total recaudado: <strong>@Model.Sum(v => v.Monto).ToString("N0") Gs</strong></p>
