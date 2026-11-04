@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página en Construcción - Aaron</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    @keyframes pulse-slow {
+      0%, 100% { transform: scale(1); opacity: 0.2; }
+      50% { transform: scale(1.08); opacity: 0.35; }
+    }
+    .animate-pulse-slow {
+      animation: pulse-slow 8s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between items-center relative overflow-x-hidden font-sans select-none">
+
+  <!-- Luces de fondo decorativas -->
+  <div class="absolute top-1/4 -left-20 w-80 h-80 bg-indigo-600/30 rounded-full blur-3xl animate-pulse-slow pointer-events-none"></div>
+  <div class="absolute bottom-1/4 -right-20 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl animate-pulse-slow pointer-events-none"></div>
+
+  <!-- Contenido principal -->
+  <main class="flex-1 flex flex-col justify-center items-center px-4 py-12 z-10 w-full max-w-2xl text-center">
+    <div class="bg-slate-900/60 backdrop-blur-xl border border-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl w-full">
+      
+      <!-- Icono animado de construcción -->
+      <div class="w-20 h-20 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 text-indigo-400 text-3xl shadow-inner">
+        <i class="fa-solid fa-helmet-safety animate-bounce"></i>
+      </div>
+
+      <!-- Título principal -->
+      <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-4">
+        Página en <span class="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">construcción</span>
+      </h1>
+
+      <!-- Subtítulo / Descripción -->
+      <p class="text-slate-400 text-base md:text-lg mb-8 max-w-md mx-auto leading-relaxed">
+        Estamos trabajando para ofrecerte una mejor experiencia. ¡Vuelve pronto para ver el resultado final!
+      </p>
+
+      <!-- Créditos / Desarrollador -->
+      <div class="inline-flex items-center gap-2 bg-slate-800/80 border border-slate-700/60 px-4 py-2 rounded-full text-xs md:text-sm text-slate-300 font-medium">
+        <span>Desarrollado por</span>
+        <span class="font-bold text-indigo-400 flex items-center gap-1.5">
+          <i class="fa-solid fa-code text-xs"></i> Aaron
+        </span>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Redes Sociales y Footer -->
+  <footer class="w-full pb-8 z-10 flex flex-col items-center gap-6">
+    <div class="flex items-center gap-4">
+      <a href="#" aria-label="GitHub" class="w-11 h-11 bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:border-indigo-500/50 hover:bg-slate-800 rounded-xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 shadow-lg">
+        <i class="fa-brands fa-github text-lg"></i>
+      </a>
+      <a href="#" aria-label="LinkedIn" class="w-11 h-11 bg-slate-900 border border-slate-800 text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 hover:bg-slate-800 rounded-xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 shadow-lg">
+        <i class="fa-brands fa-linkedin-in text-lg"></i>
+      </a>
+      <a href="#" aria-label="X (Twitter)" class="w-11 h-11 bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:border-indigo-500/50 hover:bg-slate-800 rounded-xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 shadow-lg">
+        <i class="fa-brands fa-x-twitter text-lg"></i>
+      </a>
+      <a href="#" aria-label="Instagram" class="w-11 h-11 bg-slate-900 border border-slate-800 text-slate-400 hover:text-pink-400 hover:border-pink-500/50 hover:bg-slate-800 rounded-xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 shadow-lg">
+        <i class="fa-brands fa-instagram text-lg"></i>
+      </a>
+      <a href="mailto:tuemail@ejemplo.com" aria-label="Correo electrónico" class="w-11 h-11 bg-slate-900 border border-slate-800 text-slate-400 hover:text-emerald-400 hover:border-emerald-500/50 hover:bg-slate-800 rounded-xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 shadow-lg">
+        <i class="fa-solid fa-envelope text-lg"></i>
+      </a>
+    </div>
+
+    <p class="text-xs text-slate-600 font-medium">
+      &copy; Aaron. Todos los derechos reservados.
+    </p>
+  </footer>
+
+</body>
+</html>
