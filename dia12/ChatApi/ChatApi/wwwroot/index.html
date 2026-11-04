@@ -1,0 +1,648 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chat del Aula</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #f0f2f5;
+            --chat-bg: #efeae2;
+            --primary: #0084ff;
+            --primary-hover: #0073e6;
+            --bubble-self: #d9fdd3;
+            --bubble-other: #ffffff;
+            --text-main: #1c1e21;
+            --text-muted: #65676b;
+            --danger: #dc3545;
+            --danger-hover: #bb2d3b;
+            --border-radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 16px;
+        }
+
+        .chat-card {
+            width: 100%;
+            max-width: 680px;
+            height: 90vh;
+            max-height: 850px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Cabecera */
+        .chat-header {
+            padding: 16px 20px;
+            background: #ffffff;
+            border-bottom: 1px solid #e4e6eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .chat-header-info h1 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .chat-header-info p {
+            font-size: 0.825rem;
+            color: var(--text-muted);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .contador-badge {
+            background-color: #e4e6eb;
+            color: var(--text-main);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .btn-icon {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            transition: background 0.2s;
+        }
+
+            .btn-icon:hover {
+                background: #f2f2f2;
+                color: var(--text-main);
+            }
+
+        /* Área de Mensajes */
+        .chat-messages {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: var(--chat-bg);
+            background-image: radial-gradient(#cbd5e1 1px, transparent 0);
+            background-size: 16px 16px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            scroll-behavior: smooth;
+        }
+
+        .mensaje-wrapper {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            max-width: 80%;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mensaje-wrapper.propio {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .mensaje-wrapper.otro {
+            align-self: flex-start;
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+            flex-shrink: 0;
+            text-transform: uppercase;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .burbuja {
+            position: relative;
+            padding: 10px 14px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            word-break: break-word;
+            font-size: 0.935rem;
+            line-height: 1.4;
+        }
+
+        .mensaje-wrapper.propio .burbuja {
+            background-color: var(--bubble-self);
+            border-bottom-right-radius: 2px;
+        }
+
+        .mensaje-wrapper.otro .burbuja {
+            background-color: var(--bubble-other);
+            border-bottom-left-radius: 2px;
+        }
+
+        .encabezado-mensaje {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 2px;
+        }
+
+        .autor {
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: #111b21;
+        }
+
+        .hora {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-left: auto;
+        }
+
+        .texto-mensaje {
+            color: var(--text-main);
+            white-space: pre-wrap;
+        }
+
+        .btn-eliminar {
+            opacity: 0;
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 0.7rem;
+            color: var(--danger);
+            cursor: pointer;
+            transition: opacity 0.2s, background 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .burbuja:hover .btn-eliminar {
+            opacity: 1;
+        }
+
+        .btn-eliminar:hover {
+            background: var(--danger);
+            color: white;
+        }
+
+        /* Formulario y Entrada */
+        .chat-footer {
+            padding: 12px 16px;
+            background: #ffffff;
+            border-top: 1px solid #e4e6eb;
+        }
+
+        .usuario-config {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+            .usuario-config label {
+                font-size: 0.8rem;
+                font-weight: 600;
+                color: var(--text-muted);
+                white-space: nowrap;
+            }
+
+        .input-usuario {
+            border: 1px solid #e4e6eb;
+            border-radius: 6px;
+            padding: 4px 8px;
+            font-size: 0.85rem;
+            outline: none;
+            transition: border 0.2s;
+            width: 180px;
+        }
+
+            .input-usuario:focus {
+                border-color: var(--primary);
+            }
+
+        .form-mensaje {
+            display: flex;
+            gap: 8px;
+            align-items: flex-end;
+        }
+
+        .input-container {
+            position: relative;
+            flex-grow: 1;
+        }
+
+        .textarea-mensaje {
+            width: 100%;
+            border: 1px solid #e4e6eb;
+            border-radius: 12px;
+            padding: 10px 12px;
+            padding-right: 48px;
+            font-size: 0.95rem;
+            resize: none;
+            outline: none;
+            max-height: 100px;
+            min-height: 42px;
+            background: #f0f2f5;
+            transition: border 0.2s, background 0.2s;
+        }
+
+            .textarea-mensaje:focus {
+                background: #ffffff;
+                border-color: var(--primary);
+            }
+
+        .char-counter {
+            position: absolute;
+            bottom: 8px;
+            right: 10px;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+            .char-counter.limit {
+                color: var(--danger);
+                font-weight: bold;
+            }
+
+        .btn-enviar {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+            .btn-enviar:hover {
+                background: var(--primary-hover);
+            }
+
+            .btn-enviar:active {
+                transform: scale(0.95);
+            }
+
+        .aviso {
+            font-size: 0.8rem;
+            color: var(--danger);
+            text-align: center;
+            margin-bottom: 6px;
+        }
+
+        /* Modal Personalizado */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+
+            .modal-overlay.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+        .modal-box {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            width: 90%;
+            max-width: 320px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+            .modal-box h3 {
+                margin-bottom: 8px;
+                font-size: 1.1rem;
+            }
+
+            .modal-box p {
+                font-size: 0.9rem;
+                color: var(--text-muted);
+                margin-bottom: 16px;
+            }
+
+        .modal-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .btn-modal {
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+            .btn-modal.confirm {
+                background: var(--danger);
+                color: white;
+            }
+
+            .btn-modal.cancel {
+                background: #e4e6eb;
+                color: var(--text-main);
+            }
+    </style>
+</head>
+<body>
+
+    <div class="chat-card">
+        <!-- Cabecera -->
+        <header class="chat-header">
+            <div class="chat-header-info">
+                <h1>Chat del Aula</h1>
+                <p id="subtituloEstado">En línea</p>
+            </div>
+            <div class="header-actions">
+                <span id="contadorMensajes" class="contador-badge">0 msgs</span>
+                <button type="button" id="actualizar" class="btn-icon" title="Actualizar chat">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Contenedor de Mensajes -->
+        <div id="lista" class="chat-messages"></div>
+
+        <!-- Pie de página / Formulario -->
+        <footer class="chat-footer">
+            <div id="aviso" class="aviso"></div>
+
+            <div class="usuario-config">
+                <label for="usuario">Tu nombre:</label>
+                <input id="usuario" class="input-usuario" placeholder="Ej. Juan" maxlength="30" required>
+            </div>
+
+            <form id="formulario" class="form-mensaje">
+                <div class="input-container">
+                    <textarea id="texto" class="textarea-mensaje" rows="1" placeholder="Escribe un mensaje..." maxlength="280" required></textarea>
+                    <span id="charCounter" class="char-counter">280</span>
+                </div>
+                <button type="submit" class="btn-enviar" title="Enviar mensaje">
+                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                    </svg>
+                </button>
+            </form>
+        </footer>
+    </div>
+
+    <!-- Modal de Confirmación -->
+    <div id="deleteModal" class="modal-overlay">
+        <div class="modal-box">
+            <h3>¿Eliminar mensaje?</h3>
+            <p>Esta acción no se puede deshacer.</p>
+            <div class="modal-actions">
+                <button id="btnCancelDelete" class="btn-modal cancel">Cancelar</button>
+                <button id="btnConfirmDelete" class="btn-modal confirm">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+                const lista = document.getElementById("lista");
+                const aviso = document.getElementById("aviso");
+                const inputUsuario = document.getElementById("usuario");
+                const inputTexto = document.getElementById("texto");
+                const contadorMensajes = document.getElementById("contadorMensajes");
+                const charCounter = document.getElementById("charCounter");
+                const deleteModal = document.getElementById("deleteModal");
+
+                let pendingDeleteId = null;
+
+                // Paleta de colores para avatares
+                const avatarColors = ["#0084ff", "#10b981", "#f59e0b", "#8b5cf6", "#ec4899", "#06b6d4", "#f97316"];
+
+                function getAvatarColor(nombre) {
+                    if (!nombre) return avatarColors[0];
+                    let hash = 0;
+                    for (let i = 0; i < nombre.length; i++) {
+                        hash = nombre.charCodeAt(i) + ((hash << 5) - hash);
+                    }
+                    return avatarColors[Math.abs(hash) % avatarColors.length];
+                }
+
+                function escapeHTML(str) {
+                    return str.replace(/[&<>'"]/g,
+                        tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+                    );
+                }
+
+                // Cargar nombre previo
+                if (localStorage.getItem("chat_usuario")) {
+                    inputUsuario.value = localStorage.getItem("chat_usuario");
+                }
+
+                async function cargar() {
+                    try {
+                        const respuesta = await fetch("/api/mensajes");
+                        if (!respuesta.ok) throw new Error("Status " + respuesta.status);
+                        let mensajes = await respuesta.json();
+
+                        const usuarioActual = inputUsuario.value.trim().toLowerCase();
+                        const atTop = lista.scrollTop <= 50;
+
+                        // Invierte el orden para mostrar los más recientes arriba
+                        mensajes.reverse();
+
+                        lista.innerHTML = "";
+
+                        mensajes.forEach(m => {
+                            const esPropio = usuarioActual && m.usuario && m.usuario.trim().toLowerCase() === usuarioActual;
+
+                            const wrapper = document.createElement("div");
+                            wrapper.className = `mensaje-wrapper ${esPropio ? 'propio' : 'otro'}`;
+
+                            const avatar = document.createElement("div");
+                            avatar.className = "avatar";
+                            avatar.style.backgroundColor = getAvatarColor(m.usuario);
+                            avatar.textContent = m.usuario ? m.usuario.charAt(0) : "?";
+
+                            const burbuja = document.createElement("div");
+                            burbuja.className = "burbuja";
+
+                            const horaFormateada = m.creado
+                                ? new Date(m.creado).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                                : '';
+
+                            burbuja.innerHTML = `
+                                <div class="encabezado-mensaje">
+                                    <span class="autor">${escapeHTML(m.usuario || "Anónimo")}</span>
+                                    <span class="hora">${horaFormateada}</span>
+                                </div>
+                                <div class="texto-mensaje">${escapeHTML(m.texto || "")}</div>
+                                <button class="btn-eliminar" title="Eliminar">✕</button>
+                            `;
+
+                            burbuja.querySelector(".btn-eliminar").addEventListener("click", () => solicitarEliminacion(m.id));
+
+                            wrapper.appendChild(avatar);
+                            wrapper.appendChild(burbuja);
+                            lista.appendChild(wrapper);
+                        });
+
+                        contadorMensajes.textContent = `${mensajes.length} msgs`;
+                        aviso.textContent = mensajes.length === 0 ? "Todavía no hay mensajes. ¡Sé el primero!" : "";
+
+                        // Mantener el scroll arriba si el usuario ya estaba leyendo arriba
+                        if (atTop || lista.scrollTop === 0) {
+                            lista.scrollTop = 0;
+                        }
+
+                    } catch (error) {
+                        aviso.textContent = "Error al conectar con el servidor.";
+                    }
+                }
+
+                // Manejo del contador de caracteres y altura de textarea
+                inputTexto.addEventListener("input", () => {
+                    const remaining = 280 - inputTexto.value.length;
+                    charCounter.textContent = remaining;
+                    charCounter.classList.toggle("limit", remaining < 20);
+
+                    // Ajuste automático de altura
+                    inputTexto.style.height = "auto";
+                    inputTexto.style.height = Math.min(inputTexto.scrollHeight, 100) + "px";
+                });
+
+                // Enviar con Enter (sin Shift)
+                inputTexto.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                        e.preventDefault();
+                        document.getElementById("formulario").dispatchEvent(new Event("submit"));
+                    }
+                });
+
+                // Eliminar mensaje mediante Modal
+                function solicitarEliminacion(id) {
+                    pendingDeleteId = id;
+                    deleteModal.classList.add("active");
+                }
+
+                document.getElementById("btnCancelDelete").addEventListener("click", () => {
+                    deleteModal.classList.remove("active");
+                    pendingDeleteId = null;
+                });
+
+                document.getElementById("btnConfirmDelete").addEventListener("click", async () => {
+                    if (pendingDeleteId) {
+                        await fetch("/api/mensajes/" + pendingDeleteId, { method: "DELETE" });
+                        deleteModal.classList.remove("active");
+                        pendingDeleteId = null;
+                        cargar();
+                    }
+                });
+
+                // Envío del Formulario
+                document.getElementById("formulario").addEventListener("submit", async (evento) => {
+                    evento.preventDefault();
+
+                    const nombreUsuario = inputUsuario.value.trim();
+                    const texto = inputTexto.value.trim();
+
+                    if (!nombreUsuario || !texto) return;
+
+                    localStorage.setItem("chat_usuario", nombreUsuario);
+
+                    try {
+                        const respuesta = await fetch("/api/mensajes", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ usuario: nombreUsuario, texto })
+                        });
+
+                        if (!respuesta.ok) throw new Error();
+
+                        inputTexto.value = "";
+                        inputTexto.style.height = "auto";
+                        charCounter.textContent = "280";
+
+                        await cargar();
+                        lista.scrollTop = 0; // Scroll hacia arriba al enviar nuevo mensaje
+                    } catch (err) {
+                        aviso.textContent = "Error al enviar el mensaje.";
+                    }
+                });
+
+                document.getElementById("actualizar").addEventListener("click", cargar);
+
+                inputUsuario.addEventListener("input", () => {
+                    localStorage.setItem("chat_usuario", inputUsuario.value.trim());
+                    cargar();
+                });
+
+                // Carga inicial y refresco automático cada 2 segundos (2000 ms)
+                cargar();
+                setInterval(cargar, 2000);
+    </script>
+</body>
+</html>
