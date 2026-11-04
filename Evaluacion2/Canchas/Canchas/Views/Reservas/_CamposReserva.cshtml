@@ -1,0 +1,46 @@
+﻿@model Reserva
+
+<div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+<input type="hidden" asp-for="Id" />
+
+<div class="mb-3">
+    <label asp-for="ClienteId" class="form-label"></label>
+    <select asp-for="ClienteId" asp-items="(SelectList)ViewBag.Clientes" class="form-select">
+        <option value="0">-- Elige un cliente --</option>
+    </select>
+    <span asp-validation-for="ClienteId" class="text-danger"></span>
+</div>
+
+<div class="mb-3">
+    <label asp-for="CanchaId" class="form-label"></label>
+    <select asp-for="CanchaId" asp-items="(SelectList)ViewBag.Canchas" class="form-select">
+        <option value="0">-- Elige una cancha --</option>
+    </select>
+    <span asp-validation-for="CanchaId" class="text-danger"></span>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label asp-for="Inicio" class="form-label"></label>
+        <input asp-for="Inicio" type="datetime-local" class="form-control" />
+        <span asp-validation-for="Inicio" class="text-danger"></span>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label asp-for="Fin" class="form-label"></label>
+        <input asp-for="Fin" type="datetime-local" class="form-control" />
+        <span asp-validation-for="Fin" class="text-danger"></span>
+    </div>
+</div>
+
+@if (Model.Id > 0)
+{
+    <div class="mb-3">
+        <label asp-for="Estado" class="form-label"></label>
+        <select asp-for="Estado" class="form-select">
+            <option value="Confirmada">Confirmada</option>
+            <option value="Cancelada">Cancelada</option>
+        </select>
+        <span asp-validation-for="Estado" class="text-danger"></span>
+    </div>
+}

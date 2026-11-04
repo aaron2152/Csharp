@@ -1,0 +1,17 @@
+﻿@model Reserva
+@{
+    ViewData["Title"] = "Editar reserva";
+}
+
+<h1>Editar reserva</h1>
+
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+    <partial name="_CamposReserva" model="Model" />
+
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

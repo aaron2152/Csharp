@@ -1,0 +1,251 @@
+﻿@model List<Reserva>
+
+@{
+    ViewData["Title"] = "Reservas";
+}
+
+<div class="container-fluid py-4">
+
+    <!-- Encabezado -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+        <div>
+            <h2 class="fw-bold mb-1">Reservas de canchas</h2>
+            <p class="text-muted mb-0">Administración y control de reservas</p>
+        </div>
+
+        <a asp-action="Create" class="btn btn-primary px-4 py-2 shadow-sm">
+            <i class="bi bi-plus-circle me-2"></i>
+            Nueva reserva
+        </a>
+    </div>
+
+    <!-- Mensaje TempData -->
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            @TempData["Mensaje"]
+
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+    }
+
+    <!-- Resumen -->
+    <div class="row g-3 mb-4">
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-muted mb-2 small fw-semibold">Reservas confirmadas</p>
+                            <h2 class="fw-bold mb-0">@ViewBag.Confirmadas</h2>
+                        </div>
+                        <div class="bg-primary bg-opacity-10 text-primary rounded-3 p-3">
+                            <i class="bi bi-calendar-check fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-muted mb-2 small fw-semibold">Reservas de hoy</p>
+                            <h2 class="fw-bold mb-0">@ViewBag.ReservasHoy</h2>
+                        </div>
+                        <div class="bg-info bg-opacity-10 text-info rounded-3 p-3">
+                            <i class="bi bi-calendar-day fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-muted mb-2 small fw-semibold">Ingresos confirmados</p>
+                            <h2 class="fw-bold mb-0 fs-4">@ViewBag.Ingresos.ToString("N0") <small class="text-muted fs-6">Gs.</small></h2>
+                        </div>
+                        <div class="bg-success bg-opacity-10 text-success rounded-3 p-3">
+                            <i class="bi bi-cash-stack fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <p class="text-muted mb-2 small fw-semibold">Canchas activas</p>
+                            <h2 class="fw-bold mb-0">@ViewBag.CanchasActivas</h2>
+                        </div>
+                        <div class="bg-warning bg-opacity-10 text-warning rounded-3 p-3">
+                            <i class="bi bi-dribbble fs-3"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Tabla de reservas -->
+    <div class="card border-0 shadow-sm">
+
+        <div class="card-header bg-dark text-white py-3">
+            <h5 class="mb-0 fw-semibold">
+                <i class="bi bi-list-ul me-2"></i>
+                Listado de reservas
+            </h5>
+        </div>
+
+        <div class="card-body p-0">
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle mb-0">
+
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="px-3 py-3">Cancha</th>
+                            <th class="py-3">Cliente</th>
+                            <th class="py-3">Inicio</th>
+                            <th class="py-3">Fin</th>
+                            <th class="py-3">Total</th>
+                            <th class="py-3">Estado</th>
+                            <th class="text-center py-3">Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (Reserva r in Model)
+                        {
+                            <tr>
+                                <td class="px-3">
+                                    <div class="fw-semibold text-dark">
+                                        @r.Cancha?.Nombre
+                                    </div>
+                                    <small class="text-muted">
+                                        @r.Cancha?.Tipo
+                                    </small>
+                                </td>
+
+                                <td>
+                                    <div class="fw-semibold text-dark">
+                                        @r.Cliente?.Nombre
+                                    </div>
+                                    <small class="text-muted">
+                                        @r.Cliente?.Telefono
+                                    </small>
+                                </td>
+
+                                <td>
+                                    <span class="text-nowrap">
+                                        @r.Inicio.ToString("dd/MM/yyyy")
+                                    </span>
+                                    <small class="d-block text-muted">
+                                        @r.Inicio.ToString("HH:mm")
+                                    </small>
+                                </td>
+
+                                <td>
+                                    <span class="text-nowrap">
+                                        @r.Fin.ToString("dd/MM/yyyy")
+                                    </span>
+                                    <small class="d-block text-muted">
+                                        @r.Fin.ToString("HH:mm")
+                                    </small>
+                                </td>
+
+                                <td class="fw-semibold text-nowrap">
+                                    @r.Total.ToString("N0") Gs.
+                                </td>
+
+                                <td>
+                                    @if (r.Estado == "Confirmada")
+                                    {
+                                        <span class="badge bg-success rounded-pill px-3 py-2">
+                                            <i class="bi bi-check-circle me-1"></i>
+                                            Confirmada
+                                        </span>
+                                    }
+                                    else if (r.Estado == "Cancelada")
+                                    {
+                                        <span class="badge bg-secondary rounded-pill px-3 py-2">
+                                            <i class="bi bi-x-circle me-1"></i>
+                                            Cancelada
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary rounded-pill px-3 py-2">
+                                            @r.Estado
+                                        </span>
+                                    }
+                                </td>
+
+                                <td>
+                                    <div class="d-flex justify-content-center gap-2">
+
+                                        <a asp-action="Edit"
+                                           asp-route-id="@r.Id"
+                                           class="btn btn-sm btn-outline-primary">
+                                            <i class="bi bi-pencil-square me-1"></i>
+                                            Editar
+                                        </a>
+
+                                        <form asp-action="Delete"
+                                              asp-route-id="@r.Id"
+                                              method="post"
+                                              onsubmit="return confirm('¿Eliminar esta reserva?');">
+
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                <i class="bi bi-trash me-1"></i>
+                                                Eliminar
+                                            </button>
+
+                                        </form>
+
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+
+                        @if (!Model.Any())
+                        {
+                            <tr>
+                                <td colspan="7" class="text-center py-5">
+                                    <i class="bi bi-calendar-x fs-1 text-muted d-block mb-2"></i>
+                                    <h6 class="fw-semibold text-muted">No hay reservas registradas</h6>
+                                    <p class="text-muted small mb-0">
+                                        Las nuevas reservas aparecerán aquí.
+                                    </p>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+
+        <div class="card-footer bg-white text-muted small py-3">
+            <i class="bi bi-info-circle me-1"></i>
+            Total de reservas registradas: @Model.Count
+        </div>
+
+    </div>
+
+</div>
