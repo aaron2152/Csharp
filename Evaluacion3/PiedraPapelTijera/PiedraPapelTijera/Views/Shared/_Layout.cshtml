@@ -1,0 +1,70 @@
+﻿
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - Piedra, Papel o Tijera</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <style>
+            html, body {
+                min-height: 100%;
+                margin: 0;
+                background-color: #f1f5f9;
+                color: #263238;
+            }
+
+            body {
+                min-height: 100vh;
+            }
+
+            main {
+                min-height: 100vh;
+            }
+
+            .card.bg-dark {
+                background-color: #ffffff !important;
+                color: #263238 !important;
+                border: 1px solid #e2e8f0 !important;
+                border-radius: 18px;
+            }
+
+                .card.bg-dark .text-light {
+                    color: #263238 !important;
+                }
+
+                .card.bg-dark .text-secondary {
+                    color: #64748b !important;
+                }
+
+                .card.bg-dark .alert-dark {
+                    background-color: #fff8dc !important;
+                    color: #475569 !important;
+                    border-color: #f5df91 !important;
+                }
+
+            .btn-outline-light {
+                color: #475569 !important;
+                border-color: #cbd5e1 !important;
+            }
+
+                .btn-outline-light:hover {
+                    background-color: #e2e8f0 !important;
+                    color: #1e293b !important;
+                }
+    </style>
+</head>
+
+<body>
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

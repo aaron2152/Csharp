@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Piedra, papel o tijera";
+}
+
+<div class="container min-vh-100 d-flex align-items-center justify-content-center py-5">
+    <div class="card bg-dark text-light border-secondary shadow-lg p-4" style="max-width: 500px; width: 100%;">
+        <div class="card-body text-center">
+            <h1 class="display-5 fw-bold text-warning mb-3">PIEDRA, PAPEL O TIJERA</h1>
+            <p class="text-secondary mb-4">¡Apuesta tus fichas y alcanza las 500 para ganar!</p>
+
+            <div class="display-4 mb-3">✊ ✋ ✌️</div>
+
+            <div class="alert alert-dark border-secondary">
+                <h5 class="text-warning">Fichas iniciales</h5>
+                <span class="display-6 fw-bold">100</span>
+            </div>
+
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["Error"]
+                </div>
+            }
+
+            <form asp-controller="Juego" asp-action="Iniciar" method="post">
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3 text-start">
+                    <label for="jugador" class="form-label">Nombre del jugador</label>
+                    <input type="text"
+                           id="jugador"
+                           name="jugador"
+                           class="form-control form-control-lg"
+                           maxlength="20"
+                           placeholder="Ingresa tu nombre"
+                           required />
+                </div>
+
+                <button type="submit" class="btn btn-warning btn-lg w-100 fw-bold">
+                    COMENZAR PARTIDA
+                </button>
+            </form>
+
+            <a asp-controller="Ranking" asp-action="Index"
+               class="btn btn-outline-light mt-3 w-100">
+                Ver ranking
+            </a>
+        </div>
+    </div>
+</div>

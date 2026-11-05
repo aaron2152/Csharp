@@ -1,0 +1,105 @@
+﻿@model PiedraPapelTijera.Models.Partida
+
+@{
+    ViewData["Title"] = "Nueva ronda";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="card bg-dark text-light border-secondary shadow-lg">
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <h3 class="text-warning mb-1">¡Buena suerte, @Model.NombreJugador!</h3>
+                            <span class="text-secondary">Ronda @(Model.RondasJugadas + 1)</span>
+                        </div>
+                        <div class="text-end">
+                            <small class="text-secondary">Tus fichas</small>
+                            <h2 class="text-success fw-bold">@Model.Fichas</h2>
+                        </div>
+                    </div>
+
+                    <div class="progress mb-4" style="height: 12px;">
+                        <div class="progress-bar bg-success"
+                             role="progressbar"
+                             style="width: @Math.Min(Model.Fichas / 5.0, 100)%">
+                        </div>
+                    </div>
+
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            @TempData["Error"]
+                        </div>
+                    }
+
+                    <h4 class="text-center mb-3">Elige tu jugada</h4>
+
+                    <form asp-controller="Juego" asp-action="Jugar" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-4">
+                                <input class="btn-check" type="radio"
+                                       name="jugada" id="piedra"
+                                       value="piedra" required />
+                                <label class="btn btn-outline-light w-100 py-3"
+                                       for="piedra">
+                                    <span class="d-block fs-1">✊</span>
+                                    Piedra
+                                </label>
+                            </div>
+
+                            <div class="col-4">
+                                <input class="btn-check" type="radio"
+                                       name="jugada" id="papel"
+                                       value="papel" />
+                                <label class="btn btn-outline-light w-100 py-3"
+                                       for="papel">
+                                    <span class="d-block fs-1">✋</span>
+                                    Papel
+                                </label>
+                            </div>
+
+                            <div class="col-4">
+                                <input class="btn-check" type="radio"
+                                       name="jugada" id="tijera"
+                                       value="tijera" />
+                                <label class="btn btn-outline-light w-100 py-3"
+                                       for="tijera">
+                                    <span class="d-block fs-1">✌️</span>
+                                    Tijera
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="apuesta" class="form-label">
+                                ¿Cuántas fichas quieres apostar?
+                            </label>
+                            <input type="number"
+                                   id="apuesta"
+                                   name="apuesta"
+                                   class="form-control form-control-lg"
+                                   min="1"
+                                   max="@Model.Fichas"
+                                   placeholder="Entre 1 y @Model.Fichas"
+                                   required />
+                            <div class="form-text text-secondary">
+                                Puedes apostar desde 1 hasta todas tus fichas.
+                            </div>
+                        </div>
+
+                        <button type="submit"
+                                class="btn btn-warning btn-lg w-100 fw-bold">
+                            JUGAR RONDA
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

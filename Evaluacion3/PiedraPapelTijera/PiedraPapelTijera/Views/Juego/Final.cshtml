@@ -1,0 +1,83 @@
+﻿@model PiedraPapelTijera.Models.Partida
+
+@{
+    ViewData["Title"] = "Partida finalizada";
+    var ultimoResultado = ViewBag.UltimoResultado
+        as PiedraPapelTijera.Models.ResultadoRonda;
+}
+
+<div class="container min-vh-100 d-flex align-items-center justify-content-center py-5">
+    <div class="card bg-dark text-light border-secondary shadow-lg text-center"
+         style="max-width: 600px; width: 100%;">
+        <div class="card-body p-5">
+
+            @if (Model.Estado == "Ganada")
+            {
+                <div class="display-1 mb-3">🏆</div>
+                <h1 class="text-warning fw-bold">¡VICTORIA!</h1>
+                <p class="text-secondary">¡Has alcanzado la meta de 500 fichas!</p>
+            }
+            else
+            {
+                <div class="display-1 mb-3">💔</div>
+                <h1 class="text-danger fw-bold">PARTIDA TERMINADA</h1>
+                <p class="text-secondary">Te has quedado sin fichas.</p>
+            }
+
+            <hr class="border-secondary" />
+
+            @if (ultimoResultado != null)
+            {
+                <h5 class="text-warning">Última ronda</h5>
+                <p>
+                    Tú: <strong>@ultimoResultado.JugadaJugador</strong>
+                    |
+                    Computadora: <strong>@ultimoResultado.JugadaComputadora</strong>
+                </p>
+                <p>Resultado: <strong>@ultimoResultado.Resultado</strong></p>
+            }
+
+            <h5 class="text-secondary mt-4">Jugador</h5>
+            <h3>@Model.NombreJugador</h3>
+
+            <h5 class="text-secondary mt-3">Puntaje final</h5>
+            <div class="display-3 fw-bold text-warning">@Model.Fichas</div>
+
+            <p class="text-secondary">
+                Rondas jugadas: @Model.RondasJugadas
+            </p>
+
+            @if (TempData["ErrorRanking"] != null)
+            {
+                <div class="alert alert-danger">
+                    @TempData["ErrorRanking"]
+                </div>
+
+                <form asp-controller="Juego" asp-action="ReintentarGuardar" method="post">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-outline-warning w-100 mb-2">
+                        Reintentar guardar puntaje
+                    </button>
+                </form>
+            }
+
+            @if (TempData["Mensaje"] != null)
+            {
+                <div class="alert alert-success">
+                    @TempData["Mensaje"]
+                </div>
+            }
+
+            <a asp-controller="Juego" asp-action="Index"
+               class="btn btn-warning btn-lg w-100 fw-bold mt-3">
+                JUGAR NUEVAMENTE
+            </a>
+
+            <a asp-controller="Ranking" asp-action="Index"
+               class="btn btn-outline-light w-100 mt-2">
+                VER RANKING
+            </a>
+
+        </div>
+    </div>
+</div>

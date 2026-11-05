@@ -1,0 +1,94 @@
+﻿@model List<PiedraPapelTijera.Models.Puntaje>
+
+@{
+    ViewData["Title"] = "Ranking";
+}
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <div class="display-2">🏆</div>
+        <h1 class="text-warning fw-bold">RANKING DE JUGADORES</h1>
+        <p class="text-secondary">Los mejores resultados de Piedra, papel o tijera</p>
+    </div>
+
+    <div class="card bg-dark text-light border-secondary shadow-lg">
+        <div class="card-body p-4">
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.Error
+                </div>
+            }
+
+            @if (Model.Count == 0)
+            {
+                <div class="text-center py-4">
+                    <h4 class="text-secondary">Todavía no hay puntajes registrados.</h4>
+                    <p>¡Sé el primero en aparecer en el ranking!</p>
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-light table-hover align-middle text-center">
+                        <thead>
+                            <tr class="text-warning">
+                                <th>Posición</th>
+                                <th>Jugador</th>
+                                <th>Puntaje</th>
+                                <th>Fecha</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int posicion = 1;
+                            }
+
+                            @foreach (var puntaje in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @if (posicion == 1)
+                                        {
+                                            <span class="fs-4">🥇</span>
+                                        }
+                                        else if (posicion == 2)
+                                        {
+                                            <span class="fs-4">🥈</span>
+                                        }
+                                        else if (posicion == 3)
+                                        {
+                                            <span class="fs-4">🥉</span>
+                                        }
+                                        else
+                                        {
+                                            <span>@posicion</span>
+                                        }
+                                    </td>
+                                    <td class="fw-bold">@puntaje.Jugador</td>
+                                    <td class="text-success fw-bold">
+                                        @puntaje.Puntos fichas
+                                    </td>
+                                    <td>
+                                        @puntaje.Creado.ToLocalTime().ToString("dd/MM/yyyy HH:mm")
+                                    </td>
+                                </tr>
+
+                                posicion++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+
+            <div class="text-center mt-4">
+                <a asp-controller="Juego" asp-action="Index"
+                   class="btn btn-warning fw-bold">
+                    VOLVER AL INICIO
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>

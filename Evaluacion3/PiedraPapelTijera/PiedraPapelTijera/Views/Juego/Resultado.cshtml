@@ -1,0 +1,55 @@
+﻿@model PiedraPapelTijera.Models.ResultadoRonda
+
+@{
+    ViewData["Title"] = "Resultado de la ronda";
+}
+
+<div class="container min-vh-100 d-flex align-items-center justify-content-center py-5">
+    <div class="card bg-dark text-light border-secondary shadow-lg text-center"
+         style="max-width: 600px; width: 100%;">
+        <div class="card-body p-5">
+
+            <h2 class="text-warning fw-bold mb-4">RESULTADO DE LA RONDA</h2>
+
+            <div class="row align-items-center mb-4">
+                <div class="col-5">
+                    <h5>Tu jugada</h5>
+                    <div class="display-2">
+                        @(Model.JugadaJugador == "Piedra" ? "✊" :
+                          Model.JugadaJugador == "Papel" ? "✋" : "✌️")
+                    </div>
+                    <h4>@Model.JugadaJugador</h4>
+                </div>
+
+                <div class="col-2">
+                    <span class="text-warning fw-bold fs-4">VS</span>
+                </div>
+
+                <div class="col-5">
+                    <h5>Computadora</h5>
+                    <div class="display-2">
+                        @(Model.JugadaComputadora == "Piedra" ? "✊" :
+                          Model.JugadaComputadora == "Papel" ? "✋" : "✌️")
+                    </div>
+                    <h4>@Model.JugadaComputadora</h4>
+                </div>
+            </div>
+
+            <div class="alert @(Model.Resultado == "Ganaste" ? "alert-success" :
+                                Model.Resultado == "Perdiste" ? "alert-danger" :
+                                "alert-warning")">
+                <h3 class="fw-bold mb-0">@Model.Resultado</h3>
+            </div>
+
+            <p class="fs-5">Apuesta: <strong>@Model.Apuesta fichas</strong></p>
+            <p class="fs-4 text-warning">
+                Fichas restantes: <strong>@Model.FichasFinales</strong>
+            </p>
+
+            <a asp-controller="Juego" asp-action="Ronda"
+               class="btn btn-warning btn-lg w-100 fw-bold">
+                CONTINUAR
+            </a>
+        </div>
+    </div>
+</div>
